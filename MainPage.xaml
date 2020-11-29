@@ -7,6 +7,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="White">
+    <Page.Resources>
+        <local:ConverterToString x:Key="Converter" />
+    </Page.Resources>
 
     <Grid Background="Gray">
         <Grid.RowDefinitions>
@@ -23,13 +26,14 @@
             <ColumnDefinition>
             </ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBox Foreground="Black" PlaceholderText="0.0" Background="white" x:Name="leftValueBox" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox Foreground="Black" PlaceholderText="0.0" Background="white" x:Name="rightValueBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Foreground="White" x:Name="leftCurrencyName" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock Foreground="White" x:Name="rightCurrencyName" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox PlaceholderText="0" Foreground="Black"  Background="white" x:Name="leftValueBox" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox PlaceholderText="0" Foreground="Black"  Background="white" x:Name="rightValueBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text ="{Binding ElementName=leftValueBox, Path =Text, Converter={StaticResource Converter}, Mode=TwoWay}"/>
+        <TextBlock TextTrimming="WordEllipsis" Foreground="Black" x:Name="leftCurrencyName" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock TextTrimming="WordEllipsis" Foreground="Black" x:Name="rightCurrencyName" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Button Background="Gray" Click="Left_valute_button" Content="Выбрать другую валюту" x:Name="leftValuteButton" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Button Background="Gray" Click="Right_valute_button" Content="Выбрать другую валюту" x:Name="rightValuteButton" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </Page>
+
 
 

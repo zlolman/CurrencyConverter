@@ -25,6 +25,7 @@ namespace CurrencyConverter
     public sealed partial class MainPage : Page
     {
         static Currency leftCurrency, rightCurrency;
+        static public double koef;
         public MainPage()
         {
             this.InitializeComponent();
@@ -34,11 +35,12 @@ namespace CurrencyConverter
                 rightCurrency = CurrencyList.Currencies.ToList().Find(value => value.CharCode == "USD");
                 leftCurrencyName.Text = leftCurrency.CharCode + "\n" + leftCurrency.Name;
                 rightCurrencyName.Text = rightCurrency.CharCode + "\n" + rightCurrency.Name;
+                NewKoef();
             }
         }
-        
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {  
+        {
             if (e.Parameter != null)
             {
                 ValueTuple<string, Currency> pair = (ValueTuple<string, Currency>)e.Parameter;
@@ -47,31 +49,32 @@ namespace CurrencyConverter
                     leftCurrency = pair.Item2;
                     leftCurrencyName.Text = leftCurrency.CharCode + "\n" + leftCurrency.Name;
                     rightCurrencyName.Text = rightCurrency.CharCode + "\n" + rightCurrency.Name;
-
+                    NewKoef();
                 };
                 if (pair.Item1 == "right")
                 {
                     rightCurrency = pair.Item2;
                     rightCurrencyName.Text = rightCurrency.CharCode + "\n" + rightCurrency.Name;
                     leftCurrencyName.Text = leftCurrency.CharCode + "\n" + leftCurrency.Name;
+                    NewKoef();
                 }
             }
-            //else 
-            //{
-                
-                
-            //}
         }
-        public void Left_valute_button(object sender, RoutedEventArgs e) 
+        private void Left_valute_button(object sender, RoutedEventArgs e)
         {
             var pair = ("left", leftCurrency);
-            Frame.Navigate(typeof(ListOfCurrency), pair);
+            Frame.Navigate(typeof(ListOfCurrencyPage), pair);
         }
 
-        public void Right_valute_button(object sender, RoutedEventArgs e)
+        private void Right_valute_button(object sender, RoutedEventArgs e)
         {
             var pair = ("right", rightCurrency);
-            Frame.Navigate(typeof(ListOfCurrency), pair);
+            Frame.Navigate(typeof(ListOfCurrencyPage), pair);
+        }
+
+        void NewKoef() 
+        {
+            koef = (leftCurrency.Value * (double)rightCurrency.Nominal) / ((double)leftCurrency.Nominal * rightCurrency.Value);
         }
     }
 }
