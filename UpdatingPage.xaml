@@ -6,12 +6,22 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="White">
+    Background="Gray">
 
     <Grid>
-        <StackPanel Background="Gray" Height="60" VerticalAlignment="Top">
-            <TextBlock Text="Конвертер Валют" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </StackPanel>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Конвертер Валют" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   Grid.Row="0"
+                   FontSize="16"/>
+        <ProgressRing IsActive="True" 
+                      Height="80" Width="80" 
+                      VerticalAlignment="Center" 
+                      HorizontalAlignment="Center" 
+                      Grid.Row="1"/>
     </Grid>
 </Page>
