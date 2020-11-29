@@ -10,18 +10,21 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
+            <RowDefinition 
+                Height="0.1*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Конвертер Валют" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   Grid.Row="0"
-                   FontSize="16"/>
-        <ProgressRing IsActive="True" 
-                      Height="80" Width="80" 
-                      VerticalAlignment="Center" 
-                      HorizontalAlignment="Center" 
-                      Grid.Row="1"/>
+        <TextBlock
+            Text="Конвертер Валют"  
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Grid.Row="0"
+            FontSize="16"/>
+        <ProgressRing 
+            IsActive="True" 
+            Height="80" Width="80" 
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center" 
+            Grid.Row="1"/>
     </Grid>
 </Page>

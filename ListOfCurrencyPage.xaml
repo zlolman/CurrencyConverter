@@ -9,7 +9,9 @@
     Background="White">
 
     <Grid>
-        <ListBox x:Name="valuteList" SelectionChanged="CurrencyList_SelectionChanged" >
+        <ListBox 
+            x:Name="valuteList" 
+            SelectionChanged="CurrencyList_SelectionChanged" >
             <ListBox.ItemTemplate>
                 <DataTemplate x:DataType="local:Currency">
                     <StackPanel Orientation="Horizontal" Margin="10">                        
