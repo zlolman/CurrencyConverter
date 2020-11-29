@@ -25,10 +25,10 @@ namespace CurrencyConverter
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class Updating : Page
+    public sealed partial class UpdatingPage : Page
     {
         delegate void Change(object sender, NotifyCollectionChangedEventArgs e);
-        public Updating()
+        public UpdatingPage()
         {
             this.InitializeComponent();
         }

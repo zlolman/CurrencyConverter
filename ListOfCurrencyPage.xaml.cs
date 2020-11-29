@@ -21,11 +21,11 @@ namespace CurrencyConverter
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class ListOfCurrency : Page
+    public sealed partial class ListOfCurrencyPage : Page
     {
         Currency currency;
         ValueTuple<string, Currency> pair;
-        public ListOfCurrency()
+        public ListOfCurrencyPage()
         {
             this.InitializeComponent();
             valuteList.ItemsSource = CurrencyList.Currencies;
