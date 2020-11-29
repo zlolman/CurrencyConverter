@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Net;
+using CurrencyConverter.Data;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x419
 
@@ -23,19 +24,54 @@ namespace CurrencyConverter
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        static Currency leftCurrency, rightCurrency;
         public MainPage()
         {
             this.InitializeComponent();
+            if ((leftCurrency == null) && (rightCurrency == null))
+            {
+                leftCurrency = CurrencyList.Currencies.ToList().Find(value => value.CharCode == "RUB");
+                rightCurrency = CurrencyList.Currencies.ToList().Find(value => value.CharCode == "USD");
+                leftCurrencyName.Text = leftCurrency.CharCode + "\n" + leftCurrency.Name;
+                rightCurrencyName.Text = rightCurrency.CharCode + "\n" + rightCurrency.Name;
+            }
         }
+        
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {  
+            if (e.Parameter != null)
+            {
+                ValueTuple<string, Currency> pair = (ValueTuple<string, Currency>)e.Parameter;
+                if (pair.Item1 == "left")
+                {
+                    leftCurrency = pair.Item2;
+                    leftCurrencyName.Text = leftCurrency.CharCode + "\n" + leftCurrency.Name;
+                    rightCurrencyName.Text = rightCurrency.CharCode + "\n" + rightCurrency.Name;
 
+                };
+                if (pair.Item1 == "right")
+                {
+                    rightCurrency = pair.Item2;
+                    rightCurrencyName.Text = rightCurrency.CharCode + "\n" + rightCurrency.Name;
+                    leftCurrencyName.Text = leftCurrency.CharCode + "\n" + leftCurrency.Name;
+                }
+            }
+            //else 
+            //{
+                
+                
+            //}
+        }
         public void Left_valute_button(object sender, RoutedEventArgs e) 
         {
-            Frame.Navigate(typeof(ListOfCurrency));
+            var pair = ("left", leftCurrency);
+            Frame.Navigate(typeof(ListOfCurrency), pair);
         }
 
         public void Right_valute_button(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(ListOfCurrency));
+            var pair = ("right", rightCurrency);
+            Frame.Navigate(typeof(ListOfCurrency), pair);
         }
     }
 }
