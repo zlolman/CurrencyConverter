@@ -22,11 +22,11 @@ namespace CurrencyConverter
     /// <summary>
     /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class CalculatePage : Page
     {
         static Currency leftCurrency, rightCurrency;
         static public double koef;
-        public MainPage()
+        public CalculatePage()
         {
             this.InitializeComponent();
             if ((leftCurrency == null) && (rightCurrency == null))

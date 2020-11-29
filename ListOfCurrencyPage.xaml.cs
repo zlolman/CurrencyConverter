@@ -25,7 +25,6 @@ namespace CurrencyConverter
     {
         Currency currency;
         ValueTuple<string, Currency> pair;
-        List<Currency> currencies;
         public ListOfCurrencyPage()
         {
             this.InitializeComponent();
@@ -42,7 +41,7 @@ namespace CurrencyConverter
         private void CurrencyList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             pair.Item2 = (Currency)valuteList.SelectedItem;
-            Frame.Navigate(typeof(MainPage), pair);
+            Frame.Navigate(typeof(CalculatePage), pair);
         }
     }
 }

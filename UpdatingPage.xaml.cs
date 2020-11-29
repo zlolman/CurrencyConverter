@@ -42,7 +42,7 @@ namespace CurrencyConverter
 
         private async void Downloaded()
         {
-            Frame.Navigate(typeof(MainPage));
+            Frame.Navigate(typeof(CalculatePage));
         }
 
     }
