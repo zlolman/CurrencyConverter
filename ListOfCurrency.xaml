@@ -9,6 +9,6 @@
     Background="White">
 
     <Grid>
-        <ListBox x:Name="valuteList"/>
+        <ListBox x:Name="valuteList" SelectionChanged="CurrencyList_SelectionChanged"/>
     </Grid>
 </Page>

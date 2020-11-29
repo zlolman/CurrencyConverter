@@ -23,14 +23,26 @@ namespace CurrencyConverter
     /// </summary>
     public sealed partial class ListOfCurrency : Page
     {
+        Currency currency;
+        ValueTuple<string, Currency> pair;
         public ListOfCurrency()
         {
             this.InitializeComponent();
-            List<Currency> valutes = Data.CurrencyList.valutes;
-            foreach (Currency valute in valutes) 
-            {
-                valuteList.Items.Add(valute.CharCode + " " + valute.Name);
-            }
+            valuteList.ItemsSource = CurrencyList.Currencies;
+            valuteList.DisplayMemberPath = "Name"; //+ " " + "Name" ;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            pair = (ValueTuple<string, Currency>)e.Parameter;
+            currency = pair.Item2;
+            valuteList.SelectedItem = currency;
+        }
+
+        private void CurrencyList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            pair.Item2 = (Currency)valuteList.SelectedItem;
+            Frame.Navigate(typeof(MainPage), pair);
         }
     }
 }
