@@ -67,14 +67,17 @@ namespace CurrencyConverter
                     // Если стек навигации не восстанавливается для перехода к первой странице,
                     // настройка новой страницы путем передачи необходимой информации в качестве параметра
                     // навигации
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(Updating), e.Arguments);
                 }
                 // Обеспечение активности текущего окна
                 Window.Current.Activate();
             }
-            IDataSource data = new JsonSource();
-            data.GetCurrencyList();            
+
+            
+
         }
+
+        
 
         /// <summary>
         /// Вызывается в случае сбоя навигации на определенную страницу

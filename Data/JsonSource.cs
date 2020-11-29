@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Text.Json;
+using System.Collections.ObjectModel;
+using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
+
 
 namespace CurrencyConverter.Data
 {
@@ -43,13 +48,12 @@ namespace CurrencyConverter.Data
             return JsonSerializer.Deserialize<List<Currency>>(jsonString); 
         }
 
-        public async void GetCurrencyList() 
+        public async void GetCurrencyList(CurrencyList.Change change) 
         {
-            
-            CurrencyList.valutes = Deserialization(JsonStringHandling(await GetFromWeb()));
-            Currency RUB = new Currency() { ID = "01", CharCode = "RUB", Name = "Российский рубль", Nominal = 1, NumCode = "643", Value = 1.0, Previous = 1.0 };
-            CurrencyList.valutes.Add(RUB);
-
+            CurrencyList.Currencies = new ObservableCollection<Currency> (Deserialization(JsonStringHandling(await GetFromWeb())));
+            Currency RUB = new Currency() { ID = "01", CharCode = "RUB", Name = "Российских рублей", Nominal = 1, NumCode = "643", Value = 1.0, Previous = 1.0 };
+            CurrencyList.Currencies.Add(RUB);
+            change.Invoke();
         }
     }
 }

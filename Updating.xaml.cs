@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using CurrencyConverter.Data;
+using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,9 +27,23 @@ namespace CurrencyConverter
     /// </summary>
     public sealed partial class Updating : Page
     {
+        delegate void Change(object sender, NotifyCollectionChangedEventArgs e);
         public Updating()
         {
             this.InitializeComponent();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e) 
+        {
+            CurrencyList.del += Downloaded;
+            IDataSource jsonSource = new JsonSource();
+            jsonSource.GetCurrencyList(CurrencyList.del);
+        }
+
+        private async void Downloaded()
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
+
     }
 }
