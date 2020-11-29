@@ -25,11 +25,11 @@ namespace CurrencyConverter
     {
         Currency currency;
         ValueTuple<string, Currency> pair;
+        List<Currency> currencies;
         public ListOfCurrencyPage()
         {
             this.InitializeComponent();
             valuteList.ItemsSource = CurrencyList.Currencies;
-            valuteList.DisplayMemberPath = "Name"; //+ " " + "Name" ;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
