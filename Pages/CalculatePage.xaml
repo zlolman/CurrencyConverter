@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="White">
     <Page.Resources>
-        <local:ConverterToString x:Key="Converter" />
+        <local:Converter x:Key="Converter" />
     </Page.Resources>
 
     <Grid Background="Gray">
@@ -27,7 +27,6 @@
             </ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBox 
-            PlaceholderText="0" 
             Foreground="Black"  
             Background="white" 
             x:Name="leftValueBox" 
@@ -37,10 +36,9 @@
             FontSize="16"
             Width="150"
             MaxLength="15"
-            BeforeTextChanging="leftValueBox_BeforeTextChanging"
+            BeforeTextChanging="TextBox_BeforeTextChanging"
             />
-        <TextBox 
-            PlaceholderText="0" 
+        <TextBox  
             Foreground="Black"  
             Background="white" 
             x:Name="rightValueBox" 
@@ -52,7 +50,7 @@
             FontSize="16"
             Width="150"
             MaxLength="15"
-            BeforeTextChanging="rightValueBox_BeforeTextChanging"/>
+            BeforeTextChanging="TextBox_BeforeTextChanging"/>
         <TextBlock 
             TextTrimming="WordEllipsis" 
             Foreground="White" 

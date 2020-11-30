@@ -15,12 +15,13 @@ using Windows.UI.Xaml.Navigation;
 using System.Net;
 using CurrencyConverter.Data;
 
-// Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x419
-
 namespace CurrencyConverter
 {
+    
     public sealed partial class CalculatePage : Page
     {
+        const string DEFAULTLEFTCURRENCY = "RUB";
+        const string DEFAULTRIGHTCURRENCY = "USD";
         static Currency leftCurrency, rightCurrency;
         static public double koef;
         public CalculatePage()
@@ -28,8 +29,8 @@ namespace CurrencyConverter
             this.InitializeComponent();
             if ((leftCurrency == null) && (rightCurrency == null))
             {
-                leftCurrency = CurrencyList.Currencies.ToList().Find(value => value.CharCode == "RUB");
-                rightCurrency = CurrencyList.Currencies.ToList().Find(value => value.CharCode == "USD");
+                leftCurrency = CurrencyList.Currencies.Find(value => value.CharCode == DEFAULTLEFTCURRENCY);
+                rightCurrency = CurrencyList.Currencies.Find(value => value.CharCode == DEFAULTRIGHTCURRENCY);
                 leftCurrencyName.Text = leftCurrency.CharCode + "\n" + leftCurrency.Name;
                 rightCurrencyName.Text = rightCurrency.CharCode + "\n" + rightCurrency.Name;
                 NewKoef();
@@ -43,7 +44,7 @@ namespace CurrencyConverter
                 ValueTuple<string, Currency> pair = (ValueTuple<string, Currency>)e.Parameter;
                 if (pair.Item1 == "left")
                 {
-                    leftCurrency = pair.Item2;
+                    leftCurrency = pair.Item2; 
                     leftCurrencyName.Text = leftCurrency.CharCode + "\n" + leftCurrency.Name;
                     rightCurrencyName.Text = rightCurrency.CharCode + "\n" + rightCurrency.Name;
                     NewKoef();
@@ -59,29 +60,39 @@ namespace CurrencyConverter
         }
         private void Left_valute_button(object sender, RoutedEventArgs e)
         {
-            var pair = ("left", leftCurrency);
+            var pair = ("left", leftCurrency); //выбор валюты
             Frame.Navigate(typeof(ListOfCurrencyPage), pair);
         }
 
         private void Right_valute_button(object sender, RoutedEventArgs e)
         {
-            var pair = ("right", rightCurrency);
+            var pair = ("right", rightCurrency); //выбор валюты
             Frame.Navigate(typeof(ListOfCurrencyPage), pair);
-        }       
-        
-        private void rightValueBox_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
-        {
-            args.Cancel = args.NewText.Any(c => (!char.IsDigit(c)) && ((char)c != ',') && ((char)c != '.'));
         }
 
-        private void leftValueBox_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        private void TextBox_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
         {
-            args.Cancel = args.NewText.Any(c => (!char.IsDigit(c)) && ((char)c != ',') && ((char)c != '.'));
+            args.Cancel = args.NewText.Any(c => (!char.IsDigit(c)) && ((char)c != '.')); //исключении всех символов, кроме "," "." и цифр
+            if (!String.IsNullOrEmpty(args.NewText)) 
+            {
+                char firstSymbol = args.NewText.First();
+                if (firstSymbol == '.') //проверка на корректность первого символа
+                {
+                    args.Cancel = true;
+                }
+                if (args.NewText.Last() == '.') //проверка на повторение "."
+                {
+                    if (args.NewText.IndexOf('.', 0) != (args.NewText.Length - 1))
+                    {
+                        args.Cancel = true;
+                    }                    
+                }
+            } 
         }
 
-        private void NewKoef() 
+        private void NewKoef() //вычисления коофицента 
         {
-            koef = (leftCurrency.Value * (double)rightCurrency.Nominal) / ((double)leftCurrency.Nominal * rightCurrency.Value);
+            koef = (leftCurrency.Value * (double)rightCurrency.Nominal) / ((double)leftCurrency.Nominal * rightCurrency.Value); 
         }
     }
 }
