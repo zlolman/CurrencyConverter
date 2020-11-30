@@ -12,33 +12,31 @@ namespace CurrencyConverter
     {
         public object Convert(object value, Type targetType, object paremeter, string language)
         {
-                if (value.ToString() == "") 
-                {
-                    value = "0";
-                }
+            if (!String.IsNullOrEmpty(value.ToString()))
+            {
                 value = value.ToString().Replace(".", ",");
                 double source = System.Convert.ToDouble(value.ToString());
-                double target = Math.Round(source *CalculatePage.koef, 2);
-                return target.ToString();
+                return Math.Round(source / CalculatePage.koef, 2).ToString().Replace(",", ".");
+            }
+            else 
+            {
+                return "";
+            }            
         }
 
         public object ConvertBack(object value, Type targetType, object paremeter, string language)
         {
-            //if (value != null)
-            //{
-                if (value.ToString() == "")
-                {
-                    value = "0";
-                }
+            if (!String.IsNullOrEmpty(value.ToString()))
+            {
                 value = value.ToString().Replace(".", ",");
                 double source = System.Convert.ToDouble(value.ToString());
                 double target = Math.Round(source / CalculatePage.koef, 2);
-                return target.ToString();
-            //}
-            //else
-            //{
-            //    return "0";
-            //}
+                return Math.Round(source * CalculatePage.koef, 2).ToString().Replace(",", ".");
+            }
+            else
+            {
+                return "";
+            }
         }
     }
 }

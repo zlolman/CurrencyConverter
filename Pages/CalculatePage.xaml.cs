@@ -90,7 +90,7 @@ namespace CurrencyConverter
             } 
         }
 
-        private void NewKoef() //вычисления коофицента 
+        private void NewKoef() //вычисления коофицента перевода валюты
         {
             koef = (leftCurrency.Value * (double)rightCurrency.Nominal) / ((double)leftCurrency.Nominal * rightCurrency.Value); 
         }
