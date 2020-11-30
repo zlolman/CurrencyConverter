@@ -16,7 +16,7 @@ namespace CurrencyConverter
             {
                 value = value.ToString().Replace(".", ",");
                 double source = System.Convert.ToDouble(value.ToString());
-                return Math.Round(source / CalculatePage.koef, 2).ToString().Replace(",", ".");
+                return Math.Round(source / CalculatePage.koef, 3).ToString().Replace(",", ".");
             }
             else 
             {
@@ -31,7 +31,7 @@ namespace CurrencyConverter
                 value = value.ToString().Replace(".", ",");
                 double source = System.Convert.ToDouble(value.ToString());
                 double target = Math.Round(source / CalculatePage.koef, 2);
-                return Math.Round(source * CalculatePage.koef, 2).ToString().Replace(",", ".");
+                return Math.Round(source * CalculatePage.koef, 3).ToString().Replace(",", ".");
             }
             else
             {

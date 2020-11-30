@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Text.Json;
-using System.Collections.ObjectModel;
+using System.Collections;
+using System.Linq;
 
 namespace CurrencyConverter.Data
 {
@@ -29,7 +30,7 @@ namespace CurrencyConverter.Data
         { 
             try
             {
-                jsonString = jsonString.Substring(jsonString.IndexOf("Valute") + 11); //уборка лишних частей из Json
+                jsonString = jsonString.Substring(jsonString.IndexOf("Valute") + 11); //удаление лишних частей из json
                 jsonString = jsonString.Substring(0, jsonString.Length - 6);
                 jsonString = Regex.Replace(jsonString, @"[^0-9a-zA-Z,а-яА-Я]\w\w\w[^0-9a-zA-Z,а-яА-Я][^0-9a-zA-Z,а-яА-Я]\s", "");
                 jsonString = "[\n" + jsonString + "\n]";
@@ -40,13 +41,14 @@ namespace CurrencyConverter.Data
                 return "";
             }           
         }
-        public async void GetCurrencyList(CurrencyContainer.Change change) 
-        {//десериализация
+        public async void GetCurrencyList(CurrencyContainer.Change change) //десериализация
+        {
             try
             {
                 CurrencyContainer.Currencies = JsonSerializer.Deserialize<List<Currency>>(JsonStringHandling(await GetFromWeb()));
                 Currency RUB = new Currency() { ID = "01", CharCode = "RUB", Name = "Российских рублей", Nominal = 1, NumCode = "643", Value = 1.0, Previous = 1.0 };
                 CurrencyContainer.Currencies.Add(RUB);
+                CurrencyContainer.Currencies = CurrencyContainer.Currencies.OrderBy(u => u.Name).ToList();
                 change.Invoke(); //вызов делегата для переключения окна
             }
             catch 
