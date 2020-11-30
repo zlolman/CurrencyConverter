@@ -14,8 +14,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using CurrencyConverter.Data;
 
-// Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace CurrencyConverter
 {
     public sealed partial class ListOfCurrencyPage : Page
@@ -25,7 +23,7 @@ namespace CurrencyConverter
         public ListOfCurrencyPage()
         {
             this.InitializeComponent();
-            valuteList.ItemsSource = CurrencyList.Currencies;
+            valuteList.ItemsSource = CurrencyContainer.Currencies;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

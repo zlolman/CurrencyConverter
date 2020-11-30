@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Specialized;
+using System.Collections.Generic;
 namespace CurrencyConverter.Data
 {
-    public static class CurrencyList
+    public static class CurrencyContainer
     {
-        static public ObservableCollection<Currency> Currencies { get; set; }
+        static public List<Currency> Currencies { get; set; }
         public delegate void Change();
         public static Change del;
+
     }
 }

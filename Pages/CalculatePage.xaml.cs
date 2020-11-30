@@ -29,8 +29,8 @@ namespace CurrencyConverter
             this.InitializeComponent();
             if ((leftCurrency == null) && (rightCurrency == null))
             {
-                leftCurrency = CurrencyList.Currencies.Find(value => value.CharCode == DEFAULTLEFTCURRENCY);
-                rightCurrency = CurrencyList.Currencies.Find(value => value.CharCode == DEFAULTRIGHTCURRENCY);
+                leftCurrency = CurrencyContainer.Currencies.Find(value => value.CharCode == DEFAULTLEFTCURRENCY);
+                rightCurrency = CurrencyContainer.Currencies.Find(value => value.CharCode == DEFAULTRIGHTCURRENCY);
                 leftCurrencyName.Text = leftCurrency.CharCode + "\n" + leftCurrency.Name;
                 rightCurrencyName.Text = rightCurrency.CharCode + "\n" + rightCurrency.Name;
                 NewKoef();

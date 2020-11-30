@@ -18,13 +18,8 @@ using CurrencyConverter.Data;
 using System.Collections.Specialized;
 using System.Collections.ObjectModel;
 
-// Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace CurrencyConverter
 {
-    /// <summary>
-    /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
-    /// </summary>
     public sealed partial class UpdatingPage : Page
     {
         delegate void Change(object sender, NotifyCollectionChangedEventArgs e);
@@ -33,11 +28,11 @@ namespace CurrencyConverter
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e) 
+        protected override void OnNavigatedTo(NavigationEventArgs e) //загрузка данных
         {
-            CurrencyList.del += Downloaded;
-            IDataSource jsonSource = new JsonSource();
-            jsonSource.GetCurrencyList(CurrencyList.del);
+            CurrencyContainer.del += Downloaded;
+            IDataSource jsonSource = new JsonSource(); 
+            jsonSource.GetCurrencyList(CurrencyContainer.del); //передача в качестве параметра делегата перехода окна
         }
 
         private void Downloaded()

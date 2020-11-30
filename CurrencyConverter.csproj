@@ -126,7 +126,7 @@
     <Compile Include="Data\Source\JsonSource.cs" />
     <Compile Include="Data\Source\IDataSource.cs" />
     <Compile Include="Data\Currency.cs" />
-    <Compile Include="Data\CurrencyList.cs" />
+    <Compile Include="Data\CurrencyContainer.cs" />
     <Compile Include="Pages\CalculatePage.xaml.cs">
       <DependentUpon>CalculatePage.xaml</DependentUpon>
     </Compile>

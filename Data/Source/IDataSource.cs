@@ -8,6 +8,6 @@ namespace CurrencyConverter.Data
 {
     interface IDataSource
     {
-        void GetCurrencyList(CurrencyList.Change del);
+        void GetCurrencyList(CurrencyContainer.Change del);
     }
 }
