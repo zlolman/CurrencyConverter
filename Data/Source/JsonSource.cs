@@ -1,25 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Collections.ObjectModel;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml;
-
 
 namespace CurrencyConverter.Data
 {
     class JsonSource: IDataSource
     {
         private static readonly HttpClient client = new HttpClient();
-        //private string jsonString = "";
-
-        private async Task<string> GetFromWeb() {
+        async Task<string> GetFromWeb() 
+        {
             try
             {
                 HttpResponseMessage response = await client.GetAsync("https://www.cbr-xml-daily.ru/daily_json.js");
@@ -28,8 +21,6 @@ namespace CurrencyConverter.Data
             }
             catch (HttpRequestException e)
             {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message :{0} ", e.Message);
                 return "";
             }
         }
