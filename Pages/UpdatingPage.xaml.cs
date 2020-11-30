@@ -40,7 +40,7 @@ namespace CurrencyConverter
             jsonSource.GetCurrencyList(CurrencyList.del);
         }
 
-        private async void Downloaded()
+        private void Downloaded()
         {
             Frame.Navigate(typeof(CalculatePage));
         }

@@ -14,8 +14,6 @@ namespace CurrencyConverter
         {
             if (value != null)
             {
-                
-                //value = Regex.Replace(value.ToString(), @"[^0-9.,]", "");
                 if (value.ToString() == "") 
                 {
                     value = "0";
@@ -34,8 +32,7 @@ namespace CurrencyConverter
         public object ConvertBack(object value, Type targetType, object paremeter, string language)
         {
             if (value != null)
-            {                
-                //value = Regex.Replace(value.ToString(), @"[^0-9.,]", "");
+            {
                 if (value.ToString() == "")
                 {
                     value = "0";

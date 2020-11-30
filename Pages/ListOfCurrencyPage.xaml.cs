@@ -18,9 +18,6 @@ using CurrencyConverter.Data;
 
 namespace CurrencyConverter
 {
-    /// <summary>
-    /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
-    /// </summary>
     public sealed partial class ListOfCurrencyPage : Page
     {
         Currency currency;
