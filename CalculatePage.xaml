@@ -36,7 +36,9 @@
             VerticalAlignment="Center" 
             FontSize="16"
             Width="150"
-            MaxLength="15"/>
+            MaxLength="15"
+            BeforeTextChanging="leftValueBox_BeforeTextChanging"
+            />
         <TextBox 
             PlaceholderText="0" 
             Foreground="Black"  
@@ -49,7 +51,8 @@
             Text ="{Binding ElementName=leftValueBox, Path =Text, Converter={StaticResource Converter}, Mode=TwoWay}"
             FontSize="16"
             Width="150"
-            MaxLength="15"/>
+            MaxLength="15"
+            BeforeTextChanging="rightValueBox_BeforeTextChanging"/>
         <TextBlock 
             TextTrimming="WordEllipsis" 
             Foreground="White" 

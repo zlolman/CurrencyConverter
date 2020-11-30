@@ -19,9 +19,6 @@ using CurrencyConverter.Data;
 
 namespace CurrencyConverter
 {
-    /// <summary>
-    /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
-    /// </summary>
     public sealed partial class CalculatePage : Page
     {
         static Currency leftCurrency, rightCurrency;
@@ -70,9 +67,19 @@ namespace CurrencyConverter
         {
             var pair = ("right", rightCurrency);
             Frame.Navigate(typeof(ListOfCurrencyPage), pair);
+        }       
+        
+        private void rightValueBox_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => (!char.IsDigit(c)) && ((char)c != ',') && ((char)c != '.'));
         }
 
-        void NewKoef() 
+        private void leftValueBox_BeforeTextChanging(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(c => (!char.IsDigit(c)) && ((char)c != ',') && ((char)c != '.'));
+        }
+
+        private void NewKoef() 
         {
             koef = (leftCurrency.Value * (double)rightCurrency.Nominal) / ((double)leftCurrency.Nominal * rightCurrency.Value);
         }

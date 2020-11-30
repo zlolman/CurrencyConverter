@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
+using System.Text.RegularExpressions;
 
 namespace CurrencyConverter 
 {
@@ -13,10 +14,13 @@ namespace CurrencyConverter
         {
             if (value != null)
             {
+                
+                //value = Regex.Replace(value.ToString(), @"[^0-9.,]", "");
                 if (value.ToString() == "") 
                 {
                     value = "0";
                 }
+                value = value.ToString().Replace(".", ",");
                 double source = System.Convert.ToDouble(value.ToString());
                 double target = Math.Round(source *CalculatePage.koef, 2);
                 return target.ToString();
@@ -30,11 +34,13 @@ namespace CurrencyConverter
         public object ConvertBack(object value, Type targetType, object paremeter, string language)
         {
             if (value != null)
-            {
+            {                
+                //value = Regex.Replace(value.ToString(), @"[^0-9.,]", "");
                 if (value.ToString() == "")
                 {
                     value = "0";
                 }
+                value = value.ToString().Replace(".", ",");
                 double source = System.Convert.ToDouble(value.ToString());
                 double target = Math.Round(source / CalculatePage.koef, 2);
                 return target.ToString();
